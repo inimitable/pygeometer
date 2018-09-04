@@ -11,14 +11,14 @@ from pygeometer.type_helpers import Number
 class PointND(_PointlikeND):
     _cname = 'PointND'
 
-    def vector_to(self, other):
+    def vector_to(self, other: 'PointND') -> 'VectorND':
         return VectorND((other - self).coords)
 
-    def furthest(self, points):
+    def furthest(self, points: Sequence['PointND']) -> 'PointND':
         """Return the furthest point from this point."""
         return self.furthest_n(points, 1)[0]
 
-    def furthest_n(self, points, n):
+    def furthest_n(self, points: Sequence['PointND'], n: int) -> Sequence['PointND']:
         """Return the furthest n points from this point."""
         return sorted(points, key=lambda x: self.distance(x), reverse=True)[:n]
 
@@ -39,17 +39,17 @@ class PointND(_PointlikeND):
 class Point2D(PointND):
     _cname = 'Point2D'
 
-    def __init__(self, x: Number, y: Number):
-        super(Point2D, self).__init__([x, y])
-        self.x = x
-        self.y = y
+    def __init__(self, dims: Sequence[Number]):
+        super(Point2D, self).__init__(dims)
+        self.x = dims[0]
+        self.y = dims[1]
 
 
 class Point3D(PointND):
     _cname = 'Point3D'
 
-    def __init__(self, x: Number, y: Number, z: Number):
-        super(Point3D, self).__init__([x, y, z])
-        self.x = x
-        self.y = y
-        self.z = z
+    def __init__(self, dims: Sequence[Number]):
+        super(Point3D, self).__init__(dims)
+        self.x = dims[0]
+        self.y = dims[1]
+        self.z = dims[2]
