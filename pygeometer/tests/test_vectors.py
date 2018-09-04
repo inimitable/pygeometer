@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 """docstring"""
+from math import pi
 from unittest import TestCase
 from pygeometer.Point import PointND
 from pygeometer.Vector import Vector3D, VectorND
@@ -18,6 +19,18 @@ class TestVectorND(TestCase):
     def test_mag(self):
         b = self.b
         self.assertEqual(b.magnitude, 21 ** 0.5)
+
+    def test_angle(self):
+        a = VectorND([0, 0, 0, 1])
+        b = VectorND([0, 1, 0, 0])
+        self.assertAlmostEqual(a.angle(b), pi / 2, places=10)
+        self.assertEqual(a.angle(b), b.angle(a))
+
+    def test_null_rejected(self):
+        a = VectorND([0, 0])
+        b = VectorND([1, 0])
+        with self.assertRaises(ValueError):
+            a.angle(b)
 
     def test_repr(self):
         a = self.a
@@ -37,12 +50,6 @@ class TestVector3D(TestCase):
         a = self.a
         b = self.b
         self.assertEqual(a.cross(b), (b.cross(a)) * -1)
-
-    def test_angle(self):
-        a = self.a
-        b = self.b
-        self.assertAlmostEqual(a.angle(b), 0.509739678831, places=10)
-        self.assertEqual(a.angle(b), b.angle(a))
 
     def test_from_points(self):
         a = PointND([1, 1, 1, 1, 1])
