@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 """Test suite for Point* objects."""
-from pygeometer.Point import PointND
+from pygeometer.Point import PointND, Point2D, Point3D
 from unittest import TestCase
 from random import randint
 from functools import partial
@@ -50,3 +50,25 @@ class TestPointND(TestCase):
 
         self.assertEqual(a.nearest(others), c)
         self.assertEqual(a.nearest_n(others, 2), [c, d])
+
+class TestPoint2D(TestCase):
+    def test_2d_creation(self):
+        a = Point2D((4, 5))
+        self.assertEqual(a.x, 4)
+        self.assertEqual(a.y, 5)
+
+    def test_2d_distance(self):
+        a = Point2D((3, 3))
+        b = Point2D((0, 0))
+        self.assertAlmostEqual(a.distance(b), 3 * 2 ** 0.5, places=8)
+
+    def test_2d_equality(self):
+        a = Point2D((4, 4))
+        b = Point2D((0, 0))
+        c = Point2D((0, 0))
+        self.assertNotEqual(a, b)
+        self.assertEqual(b, c)
+
+    def test_repr(self):
+        a = Point2D([1, 5])
+        self.assertEqual(a.__repr__(), 'Point2D((1, 5))')
