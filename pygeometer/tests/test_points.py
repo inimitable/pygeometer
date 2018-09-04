@@ -60,7 +60,7 @@ class TestPoint2D(TestCase):
     def test_2d_distance(self):
         a = Point2D((3, 3))
         b = Point2D((0, 0))
-        self.assertAlmostEqual(a.distance(b), 3 * 2 ** 0.5, places=8)
+        self.assertAlmostEqual(a.distance(b), 3 * 2 ** 0.5, places=10)
 
     def test_2d_equality(self):
         a = Point2D((4, 4))
