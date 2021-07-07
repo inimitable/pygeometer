@@ -9,7 +9,6 @@ from pygeometer.type_helpers import Number
 
 
 class VectorND(_PointlikeND):
-    _cname = 'VectorND'
 
     @property
     def magnitude(self):
@@ -36,7 +35,6 @@ class VectorND(_PointlikeND):
 
 
 class Vector3D(VectorND):
-    _cname = 'Vector3D'
 
     def cross(self, other: 'Vector3D'):
         """Computes the cross product of two vectors."""

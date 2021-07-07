@@ -2,10 +2,8 @@
 # -*- coding: UTF-8 -*-
 """Common behaviors for Points and Vectors."""
 
+
 class _PointlikeND:
-
-    _cname = '_PointlikeND'
-
     def __init__(self, dims):
         self.dimension = len(dims)
         self.coords = tuple(dims)
@@ -45,7 +43,8 @@ class _PointlikeND:
     def distance(self, other):
         return sum(map(lambda x: x ** 2, (self - other).coords)) ** 0.5
 
+
     def __repr__(self):
         #cls = str(self.__class__).split('.')[-1][:-2]
-        return f"{self._cname}({self.coords})"
+        return f"{self.__class__.__name__}({self.coords})"
 

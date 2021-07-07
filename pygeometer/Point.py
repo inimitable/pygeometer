@@ -28,16 +28,13 @@ class PointND(_PointlikeND):
 
     def nearest_n(self, points: Sequence['PointND'], n: int) -> Sequence['PointND']:
         """Return the closest n points to this point."""
-        if n > len(points):
-            raise ValueError('cannot return more points than given')
-        elif n == len(points):
-            return points
+        point_count = len(points)
+        n = min(n, point_count)
 
         return sorted(points, key=lambda x: self.distance(x))[:n]
 
 
 class Point2D(PointND):
-    _cname = 'Point2D'
 
     def __init__(self, dims: Sequence[Number]):
         super(Point2D, self).__init__(dims)
@@ -46,7 +43,6 @@ class Point2D(PointND):
 
 
 class Point3D(PointND):
-    _cname = 'Point3D'
 
     def __init__(self, dims: Sequence[Number]):
         super(Point3D, self).__init__(dims)
